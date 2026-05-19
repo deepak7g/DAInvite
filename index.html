@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>D & A</title>
+      <!-- Title Logo / Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Mobile Icon -->
+    <link rel="apple-touch-icon" href="favicon.png">
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:'Montserrat',sans-serif;
+      
+      color:#222;
+      overflow-x:hidden;
+    }
+
+    img{
+      width:100%;
+      display:block;
+    }
+
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
+
+    /* =========================
+       NAVBAR
+    ========================== */
+
+    .navbar{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      z-index:1000;
+      padding:20px 7%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      /* background:rgba(255,255,255,0.9); */
+      /* backdrop-filter:blur(12px); */
+      /* border-bottom:1px solid rgba(0,0,0,0.06); */
+    }
+
+    .logo{
+      font-size:34px;
+      font-family:'Cormorant Garamond',serif;
+      font-weight:600;
+      letter-spacing:3px;
+      color: #ddd;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:35px;
+    }
+
+    .nav-links a{
+      font-size:14px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      transition:0.3s;
+      
+    }
+
+    .nav-links a:hover{
+      opacity:0.6;
+    }
+
+    /* MOBILE MENU */
+
+    .menu-btn{
+      display:none;
+      flex-direction:column;
+      gap:5px;
+      cursor:pointer;
+    }
+
+    .menu-btn span{
+      width:26px;
+      height:2px;
+      background:#ddd;
+      transition:0.3s;
+    }
+
+    /* =========================
+   HERO
+========================== */
+
+.hero{
+  position:relative;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  overflow:hidden;
+  padding:20px;
+}
+
+/* BACKGROUND IMAGE */
+
+.hero-bg{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:1;
+}
+
+/* DARK OVERLAY */
+
+.hero-overlay{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.35);
+  z-index:2;
+}
+
+/* CONTENT */
+
+.hero-content{
+  position:relative;
+  z-index:3;
+  color:#fff;
+  max-width:800px;
+  animation:fadeIn 1.2s ease;
+}
+
+.hero-content p{
+  letter-spacing:4px;
+  margin-bottom:20px;
+  font-size:14px;
+}
+
+.hero-content h1{
+  font-size:50px;
+  line-height:1;
+  margin-bottom:25px;
+  font-family:'Cormorant Garamond',serif;
+  font-weight:500;
+}
+
+.hero-content h3{
+  font-size:22px;
+  font-weight:300;
+}
+
+    /* =========================
+       COMMON SECTION
+    ========================== */
+
+    section{
+      padding:100px 8%;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:70px;
+    }
+
+    .section-title h2{
+      font-size:58px;
+      font-family:'Cormorant Garamond',serif;
+      margin-bottom:12px;
+      font-weight:500;
+    }
+
+    .section-title p{
+      color:#777;
+      font-size:15px;
+    }
+/* 
+    /* =========================
+       GALLERY
+    ========================== 
+
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:20px;
+    }
+
+    .gallery-item{
+      height:350px;
+      border-radius:20px;
+      overflow:hidden;
+      background:#ddd;
+    }
+
+    .gallery-item img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    } */
+/* =========================
+   SWIPE GALLERY
+========================== */
+
+.gallery-slider{
+  width:100%;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+
+.gallery-slider::-webkit-scrollbar{
+  display:none;
+}
+
+.gallery-track{
+  display:flex;
+  gap:20px;
+}
+
+.slide{
+  flex:0 0 85%;
+  scroll-snap-align:center;
+  border-radius:25px;
+  overflow:hidden;
+  background:#ddd;
+}
+
+.slide img{
+  width:100%;
+  height:500px;
+  object-fit:cover;
+  display:block;
+}
+
+/* TABLET */
+
+@media(max-width:900px){
+
+  .slide{
+    flex:0 0 90%;
+  }
+
+  .slide img{
+    height:420px;
+  }
+
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+  .slide{
+    flex:0 0 100%;
+  }
+
+  .slide img{
+    height:320px;
+  }
+
+}
+
+
+
+    /* =========================
+       EVENT
+    ========================== */
+
+    .event-card{
+      max-width:850px;
+      margin:auto;
+      background:#fff;
+      padding:70px;
+      border-radius:30px;
+      text-align:center;
+      box-shadow:0 10px 40px rgba(0,0,0,0.06);
+    }
+
+    .event-card h3{
+      font-size:48px;
+      margin-bottom:30px;
+      font-family:'Cormorant Garamond',serif;
+      font-weight:500;
+    }
+
+    .event-card p{
+      margin-bottom:18px;
+      color:#555;
+      font-size:17px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    footer{
+      background:#111;
+      color:#fff;
+      padding:60px 20px;
+      text-align:center;
+    }
+
+    footer h2{
+      font-family:'Cormorant Garamond',serif;
+      font-size:42px;
+      margin-bottom:10px;
+      font-weight:500;
+    }
+
+    footer p{
+      opacity:0.8;
+      font-size:14px;
+    }
+
+    /* =========================
+       ANIMATION
+    ========================== */
+
+    @keyframes fadeIn{
+
+      from{
+        opacity:0;
+        transform:translateY(30px);
+      }
+
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media(max-width:1100px){
+
+      .gallery{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .hero-content h1{
+        font-size:20px;
+      }
+
+    }
+
+    @media(max-width:900px){
+
+      .menu-btn{
+        display:flex;
+      }
+
+      .nav-links{
+        position:absolute;
+        top:100%;
+        right:0;
+        width:100%;
+        background:#fff;
+        flex-direction:column;
+        align-items:center;
+        gap:25px;
+        padding:35px 0;
+        display:none;
+      }
+
+      .nav-links.active{
+        display:flex;
+      }
+
+      .hero-content h1{
+        font-size:20px;
+      }
+
+      .section-title h2{
+        font-size:46px;
+      }
+
+      .event-card{
+        padding:45px 25px;
+      }
+
+    }
+
+    @media(max-width:600px){
+
+      .navbar{
+        padding:18px 5%;
+      }
+
+      .logo{
+        font-size:28px;
+      }
+
+      .hero{
+        padding-top:100px;
+      }
+
+      .hero-content h1{
+        font-size:20px;
+      }
+
+      .hero-content h3{
+        font-size:16px;
+      }
+
+      .gallery{
+        grid-template-columns:1fr;
+      }
+
+      .gallery-item{
+        height:300px;
+      }
+
+      .section-title h2{
+        font-size:38px;
+      }
+
+      .event-card h3{
+        font-size:38px;
+      }
+
+    }
+
+
+    /* =========================
+   FAMILY SECTION
+========================== */
+
+.family-container{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:40px;
+}
+
+.family-card{
+  background:#fff;
+  border-radius:30px;
+  overflow:hidden;
+  box-shadow:0 10px 35px rgba(0,0,0,0.06);
+  transition:0.4s;
+}
+
+.family-card:hover{
+  transform:translateY(-8px);
+}
+
+.family-image{
+  height:420px;
+  overflow:hidden;
+  background:#ddd;
+}
+
+.family-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.family-content{
+  padding:35px;
+  text-align:center;
+}
+
+.family-content h3{
+  font-size:34px;
+  margin-bottom:15px;
+  font-family:'Cormorant Garamond',serif;
+  font-weight:600;
+}
+
+.family-content h4{
+  font-size:20px;
+  margin-bottom:18px;
+  font-weight:500;
+  color:#222;
+}
+
+.family-content p{
+  color:#666;
+  line-height:1.8;
+  font-size:15px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+  .family-container{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .family-image{
+    height:300px;
+  }
+
+  .family-content{
+    padding:25px;
+  }
+
+  .family-content h3{
+    font-size:28px;
+  }
+
+  .family-content h4{
+    font-size:18px;
+  }
+
+}
+  </style>
+</head>
+
+<body style="background-color: #d1aaaa;">
+
+  <!-- NAVBAR -->
+
+  <nav class="navbar">
+
+    <div class="logo">D & S</div>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#event">Event</a>
+    </div>
+
+    <div class="menu-btn" id="menuBtn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+  </nav>
+
+
+ <!-- HERO -->
+
+<section class="hero" id="home">
+
+  <!-- BACKGROUND IMAGE -->
+
+  <img src="images\Wide.jpg" alt="" class="hero-bg">
+
+  <!-- OVERLAY -->
+
+  <div class="hero-overlay"></div>
+
+  <!-- CONTENT -->
+
+  <div class="hero-content">
+
+    <h1> A journey of love, laughter and forever starts here.</h1>
+<br><br><br><br>
+    <p>WE ARE GETTING MARRIED</p>
+
+    <h1>Deepak G <br> & <br> Aarthi S</h1>
+
+    <h3>Save The Date — 28 May 2026</h3>
+
+  </div>
+
+</section>
+
+  <!-- FAMILY SECTION -->
+
+<section id="family">
+
+  <div class="section-title">
+    <h2>With The Blessings Of</h2>
+    <p>Our beloved parents</p>
+  </div>
+
+  <div class="family-container">
+
+    <!-- BOY SIDE -->
+
+    <div class="family-card">
+
+      <!-- <div class="family-image">
+        <img src="boys-family.jpg" alt="">
+      </div> -->
+
+      <div class="family-content">
+
+        <h3>Groom Side</h3>
+
+        <h4>Mr. T. Gandhi <br>&<br> Mrs. G. Jeeva (a) Lakshimi </h4>
+
+        <p>
+          Request the honour of your presence
+          at the wedding reception ceremony
+          of their beloved son.
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- GIRL SIDE -->
+
+    <div class="family-card">
+
+      <!-- <div class="family-image">
+        <img src="C:\Users\ELCOT\Desktop\Wedding Web\images\download.jpg" alt="">
+      </div> -->
+
+      <div class="family-content">
+
+        <h3>Bride Side</h3>
+
+        <h4>Mr. D. Srinivasalu <br>&<br> Mrs. J. Aruna</h4>
+
+        <p>
+          Cordially invite you to celebrate
+          the joyful wedding occasion
+          with family and friends.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+  
+  <!-- GALLERY -->
+
+<section id="gallery">
+
+  <div class="section-title">
+    <h2>Gallery</h2>
+    <p>Swipe to view photos</p><br>
+    <p>→ → →</p>
+  </div>
+
+  <div class="gallery-slider">
+
+    <div class="gallery-track">
+
+      <div class="slide">
+        <img src="images\img1.JPG" alt="">
+      </div>
+
+      <div class="slide">
+        <img src="images\img2.jpeg" alt="">
+      </div>
+
+      <div class="slide">
+        <img src="images\img3.jpeg" alt="">
+      </div>
+
+      <div class="slide">
+        <img src="images\img4.jpeg" alt="">
+      </div>
+            <div class="slide">
+        <img src="images\img5.jpeg" alt="">
+      </div>
+
+      <div class="slide">
+        <img src="images\img6.jpeg" alt="">
+      </div>
+
+      <div class="slide">
+        <img src="images\img7.jpeg" alt="">
+      </div>
+
+      <div class="slide">
+        <img src="images\img8.jpeg" alt="">
+      </div>
+            <div class="slide">
+        <img src="images\img9.jpeg" alt="">
+      </div>
+
+      <div class="slide">
+        <img src="images\img10.jpeg" alt="">
+      </div>
+
+      <div class="slide">
+        <img src="images\img11.jpeg" alt="">
+      </div>
+
+      <div class="slide">
+        <img src="images\img12.jpeg" alt="">
+      </div>
+
+      <div class="slide">
+        <img src="images\img13.jpeg" alt="">
+      </div>
+
+      <div class="slide">
+        <img src="images\img14.jpeg" alt="">
+      </div>
+            <div class="slide">
+        <img src="images\img15.jpeg" alt="">
+      </div>
+
+      <div class="slide">
+        <img src="images\img16.jpeg" alt="">
+      </div>
+
+      <div class="slide">
+        <img src="images\img17.jpeg" alt="">
+      </div>
+
+      <div class="slide">
+        <img src="images\img18.jpeg" alt="">
+      </div>
+            <div class="slide">
+        <img src="images\img19.jpeg" alt="">
+      </div>
+
+      <div class="slide">
+        <img src="images\img20.jpeg" alt="">
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+  <!-- EVENT -->
+
+<section id="event">
+
+  <div class="section-title">
+    <h2>Events</h2><br>
+    <h3>Venue & Schedule</h3>
+    
+  </div>
+
+  <div class="family-container">
+
+    <!-- BOY SIDE -->
+
+    <div class="family-card">
+
+      <!-- <div class="family-image">
+        <img src="boys-family.jpg" alt="">
+      </div> -->
+
+      <div class="family-content">
+
+        <h3>Marraige </h3>
+        <p>On Thursday <b>28th May 2026</b>, <br> between 6.00pm - 7.30pm.</p>
+<br>
+        <h4>at T N Narayanaswamy Kalyana Mandapam </h4>
+
+        <p >
+          <a href="https://maps.app.goo.gl/SZ9mc5zFQfcFTowM6">📍 Click here for the location</a>
+          <br>
+            
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- GIRL SIDE -->
+
+    
+
+    <!-- BOY SIDE -->
+
+    <div class="family-card">
+
+      <!-- <div class="family-image">
+        <img src="boys-family.jpg" alt="">
+      </div> -->
+
+      <div class="family-content">
+
+        <h3>Reception </h3>
+        <p>on Monday <b>1st June 2026,</b> <br> 6.30pm onwards.</p>
+<br>
+        <h4>at A N R Thirumana Maligai </h4>
+
+        <p >
+          <a href="https://maps.app.goo.gl/2quSD2WoePxNzpjV7">📍Click here for the location</a>
+          <br>
+            
+        </p>
+
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <h2>Deepak & Aarthi </h2>
+
+    <p>Thank you for celebrating with us.</p>
+
+  </footer>
+
+  <!-- JS -->
+
+  <script>
+
+    // MOBILE MENU
+
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // AUTO CLOSE MENU
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+
+    });
+
+  </script>
+
+</body>
+</html>
